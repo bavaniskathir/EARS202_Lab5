@@ -26,11 +26,11 @@ display(time_domain)
 freq_domain = plot(freqs, abs.(F), title="Spectrum", yscale=:log10, framestyle=:box)
 display(freq_domain)
 
-## --- Electric Production dataset
+## --- Air Passengers dataset
 data = importdataset("AirPassengers.csv", ',', importas=:Tuple)
 
 # Signal: Passengers
-wl = data.Passengers
+P = data.Passengers
 # Number of sample points
 N = length(data.Month)
 # Sample period
@@ -42,12 +42,12 @@ tmax = t0 + N * Ts
 t = t0:Ts:tmax
 
 # Fast Fourier Transform
-ft = fft(wl)
+ft = fft(P)
 F = fftshift(ft)
 freqs = fftshift(fftfreq(N, 1.0/Ts))
 
 # Plot results
-time_domain = plot(t[1:end-1], wl, title="Signal", framestyle=:box)
+time_domain = plot(t[1:end-1], P, title="Signal", framestyle=:box)
 display(time_domain)
 
 freq_domain = plot(freqs, abs.(F), title="Spectrum", yscale=:log10, framestyle=:box)
